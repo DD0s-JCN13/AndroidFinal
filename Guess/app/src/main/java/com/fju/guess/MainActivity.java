@@ -12,6 +12,9 @@ import java.util.Random;
 public class MainActivity extends AppCompatActivity {
     TextView guesser;
     TextView tester;
+    TextView information;
+    int max =100;
+    int min =1;
     Random r = new Random();
     int counter = 0;
     public final int set = r.nextInt(100)+1;
@@ -27,23 +30,29 @@ public class MainActivity extends AppCompatActivity {
     public void findview(){
         guesser = findViewById(R.id.number);
         tester = findViewById(R.id.secret);
+        information = findViewById(R.id.info);
     }
     public void send(View v){
         int input = Integer.parseInt(guesser.getText().toString());
         if(input<set){
             counter++;
-            new AlertDialog.Builder(this)
+            min = input;
+            /*new AlertDialog.Builder(this)
                     .setTitle("HINT")
                     .setMessage(input+" to 100")
                     .setPositiveButton("OK",null)
-                    .show();
+                    .show();*/
+            information.setText("Please enter a number ("+min+"-"+max+")");
         }else if(input>set){
             counter++;
+            max = input;
+            /*
             new AlertDialog.Builder(this)
                     .setTitle("HINT")
                     .setMessage("1 to "+input)
                     .setPositiveButton("OK",null)
-                    .show();
+                    .show();*/
+            information.setText("Please enter a number ("+min+"-"+max+")");
         }else{
             if(counter<=3){
                 Intent intent = new Intent(this,ExcellentActivity.class);
